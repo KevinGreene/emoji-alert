@@ -2,13 +2,13 @@ require('dotenv').config();
 var RtmClient = require('@slack/client').RtmClient;
 var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var WebClient = require('@slack/client').WebClient;
-var bot_token = process.env.SLACK_BOT_TOKEN || '';
+var bot_token = process.env.SLACK_BOT_TOKEN;
 
 var web = new WebClient(bot_token);
 var rtm = new RtmClient(bot_token);
 
 var triggers = ["space_invader"];
-var reporting_channel = "C0YR8NDGX";
+var reporting_channel = process.env.SLACK_REPORTING_CHANNEL;
 
 rtm.on(RTM_EVENTS.REACTION_ADDED, function handleRtmMessage(message) {
   var reaction = message.reaction;
